@@ -1,0 +1,16 @@
+FROM jenkins/jenkins:lts
+
+# Passer à l'utilisateur root pour l'installation
+USER root
+
+# Installer Node.js et npm
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get install -y npm && \
+    npm install -g @angular/cli && \
+    apt-get clean
+
+# Revenir à l'utilisateur Jenkins
+USER jenkins
